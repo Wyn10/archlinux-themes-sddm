@@ -29,7 +29,7 @@ Rectangle {
         Background {
             x: geometry.x; y: geometry.y; width: geometry.width; height:geometry.height
             source: config.background
-            fillMode: Image.Tile
+            fillMode: Image.PreserveAspectCrop
             onStatusChanged: {
                 if (status == Image.Error && source != config.defaultBackground) {
                     source = config.defaultBackground
@@ -44,23 +44,11 @@ Rectangle {
         color: "transparent"
         transformOrigin: Item.Top
 
-        Image {
-            id: archlinux
-            width: 450
-            height: 150
-            anchors.centerIn: parent
-            anchors.verticalCenterOffset: -75
-            anchors.horizontalCenterOffset: 0
-            fillMode: Image.PreserveAspectFit
-            transformOrigin: Item.Center
-            source: "archlinux.png"
-        }
-
         Rectangle {
             anchors.centerIn: parent
             width: Math.max(480, mainColumn.implicitWidth + 40)
             height: Math.max(240, mainColumn.implicitHeight + 40)
-            anchors.verticalCenterOffset: Math.max(180, mainColumn.implicitHeight * 0.75)
+            anchors.verticalCenterOffset: Math.max(280, mainColumn.implicitHeight * 0.75)
             color: "#0C0C0C"
 
             Column {
@@ -68,19 +56,6 @@ Rectangle {
                 anchors.centerIn: parent
                 width: parent.width * 0.9
                 spacing: 12
-
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    verticalAlignment: Text.AlignVCenter
-                    width: parent.width
-                    height: text.implicitHeight
-                    color: "white"
-                    text: textConstants.welcomeText.arg(sddm.hostName)
-                    wrapMode: Text.WordWrap
-                    font.pixelSize: 24
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                }
 
                 Row {
                     width: parent.width
